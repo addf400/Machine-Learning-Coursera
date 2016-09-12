@@ -37,12 +37,11 @@ grad = zeros(size(theta));
 %
 
 
+n = size(theta, 1);
 
-
-
-
-
-
+J = sum(-y .* log(sigmoid(X * theta)) - (1 - y) .* log(1 - sigmoid(X * theta))) / m + lambda / (2 * m) * (theta(2:n, :)' * theta(2:n, :));
+grad = sum(repmat(sigmoid(X * theta) - y, 1, n) .* X, 1)' / m;
+grad(2:n, :) = grad(2:n, :) + theta(2:n, :) * (lambda / m);
 
 
 % =============================================================
